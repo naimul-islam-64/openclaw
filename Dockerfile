@@ -42,6 +42,7 @@ RUN if [ -n "$OPENCLAW_INSTALL_BROWSER" ]; then \
       rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*; \
     fi
 # Install ollama and cloud models
+RUN apt install zstd -y
 RUN curl -fsSL https://ollama.com/install.sh | sh
 RUN ollama serve &
 RUN ollama run gemma3:4b-cloud
