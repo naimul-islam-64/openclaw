@@ -41,6 +41,15 @@ RUN if [ -n "$OPENCLAW_INSTALL_BROWSER" ]; then \
       apt-get clean && \
       rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*; \
     fi
+# Install ollama and cloud models
+RUN curl -fsSL https://ollama.com/install.sh | sh
+RUN ollama serve &
+RUN ollama run gemma3:4b-cloud
+RUN ollama pull nemotron-3-nano:30b-cloud
+RUN ollama pull kimi-k2.5:cloud
+RUN ollama pull minimax-m2.1:cloud
+RUN ollama list
+
 
 USER node
 COPY --chown=node:node . .
